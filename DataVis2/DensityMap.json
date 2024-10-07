@@ -1,0 +1,98 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "South Australia School Student Density by Suburb (2023)",
+    "background": "#f0f0f0",
+    "width": "container",
+    "height": 500,
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2023,
+        "bind": {
+          "input": "range",
+          "min": 2015,
+          "max": 2023,
+          "step": 1,
+          "name": "Year: "
+        }
+      }
+    ],
+    "projection": {
+      "type": "mercator"
+    },
+    "layer": [
+      {
+        "data": {
+          "url": "Suburbs_GDA.json",
+          "format": {"type": "topojson", "feature": "Suburbs_GDA94"}
+        },
+        "transform": [
+          {
+            "calculate": "'Data is not available in ' + datum.properties.Suburb",
+            "as": "note"
+          }
+        ],
+        "mark": {
+          "type": "geoshape",
+          "fill": "#ddd",
+          "stroke": "white",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "tooltip": {"field": "note"}
+        }
+      },
+      {
+        "data": {
+          "url": "SAschools.csv"
+        },
+        "transform": [
+          {
+            "lookup": "Suburb",
+            "from": {
+              "data": {
+                "url": "Suburbs_GDA.json",
+                "format": {"type": "topojson", "feature": "Suburbs_GDA94"}
+              },
+              "key": "properties.Suburb",
+              "fields": ["geometry"]
+            },
+            "as": "geo"
+          },
+          {
+            "filter": "datum.Year == Year_selection"
+          },
+          {
+            "aggregate": [
+              {
+                "op": "sum",
+                "field": "Enrollment",
+                "as": "Total Enrollment"
+              }
+            ],
+            "groupby": ["Suburb"]
+          }
+        ],
+        "mark": {
+          "type": "geoshape",
+          "stroke": "#fff",
+          "strokeWidth": 0.5
+        },
+        "encoding": {
+          "shape": {"field": "geo", "type": "geojson"},
+          "color": {
+            "field": "Total Enrollment",
+            "type": "quantitative",
+            "title": "Student Density",
+            "scale": {"scheme": "blues"}
+          },
+          "tooltip": [
+            {"field": "Suburb", "type": "nominal", "title": "Suburb"},
+            {"field": "Total Enrollment", "type": "quantitative", "title": "Total Students"},
+            {"field": "Year", "type": "quantitative", "title": "Year"}
+          ]
+        }
+      }
+    ]
+  }
+  

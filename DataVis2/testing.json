@@ -1,0 +1,25 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "South Australia Suburb Boundaries",
+    "background": "#f0f0f0",
+    "width": "container",
+    "height": 500,
+    "projection": {
+      "type": "mercator"
+    },
+    "layer": [
+      {
+        "data": {
+          "url": "Suburbs_GDA.json",
+          "format": {"type": "topojson", "feature": "Suburbs_GDA2020"}
+        },
+        "mark": {
+          "type": "geoshape",
+          "fill": "#ddd",
+          "stroke": "black",
+          "strokeWidth": 1
+        }
+      }
+    ]
+  }
+  
