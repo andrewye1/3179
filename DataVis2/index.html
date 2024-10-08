@@ -10,15 +10,85 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-    <script src="Week10.js"></script>
+    <!-- Import pure.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+    integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+<!-- CSS file -->
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
     <title>South Australia Government Schools Enrollment by School </title>
 </head>
 
 <body>
-    <h1>South Australia Government Schools Enrollment by School</h1>
-    <div id="map_chart">
-    </div>
-</body>
+<!--Heading-->
+    <div class="page">
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+              <h1>School Enrollments in South Australian Schools</h1>
+            </div>
+          </div>
 
-</html>
+<!--Map and Text-->
+    <div class="pure-g">
+        <div class="pure-u-1-2">
+            <div id="visMap" class="vis-container"></div>
+        </div>
+    <div class="pure-u-1-2">
+        <div class="description description-right">
+            <h2>South Australian School Students</h2>
+            <p>The chart on the left shows each individual school in South Australia in a zoomable map which can be centered using the Map Center function. Only Government schools are shown in the map, with each type of school being represented in a different colour. 
+            The map shows the total enrollment numbers per school for 2023 school year, as well as the name of the school, the Suburb that it is located in, as well as the postcode of the suburb. </p>
+            <p>From the line chart below, it is shown that Primary Education Schools have the most amount of students, at 84439 combined for the school year of 2023, and is the most popular type of school within South Australia
+                with the number of primary schools within South Australia being 509. </p>
+            </div>
+        </div>
+    </div>
+<!-- end pure grid group -->
+
+    <!-- Vis Vis Text -->
+    <div class="pure-g">
+        <div class="pure-u-1-2">
+            <div id="visBar" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-2">
+            <div class="pure-u-1-2" style="width: 50%;">
+            <div id="visLine" class="vis-container" style="margin-left: 15px;"></div>
+      </div>
+    <!-- end pure grid group -->
+
+
+    <script type="text/javascript">
+        var visMapChart = "map.json";
+        var visLineChart = "linechart.json";
+        var visBarChart = "barchart.json";
+    
+        vegaEmbed('#visMap', visMapChart, { "actions": false });
+    
+        vegaEmbed('#visLine', visLineChart, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+    
+        vegaEmbed('#visBar', visBarChart, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+      </script>
+    </body>
+    
+    </html>
+
+
+
+
+
+
+
+
+
+
+
