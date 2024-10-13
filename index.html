@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+    <!-- Import pure.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+    integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+<!-- CSS file -->
+<link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+    <title>A View into South Australia Schools Enrollment </title>
+</head>
+
+<body>
+<!--Heading-->
+    <div class="page">
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+              <h1>A View into South Australia Schools Enrollment</h1>
+            </div>
+          </div>
+
+<!--Map and Text-->
+    <div class="pure-g">
+        <div class="pure-u-1-2" style="width: 50%;">
+            <div id="visMap" class="vis-container"></div>
+        </div>
+    <div class="pure-u-1-2" style="width: 50%;">
+        <div class="description description-right">
+            <h2>Location of South Australian Schools</h2>
+            <p>The chart on the left shows each individual school in South Australia in a zoomable map which can be centered using the Map Center function. The Map Center function includes the top 10 most populous cities within South Australia, which accounts for 78% of the 
+                total population of South Austalia.
+            <p>Only Government schools are shown in the map, with each type of school being represented in a different colour.  The map shows the total enrollment numbers per school for 2023 school year, as well as the name of the school, the Suburb that it is located in, as well as the postcode of the suburb.  </p>
+            <p>Zoom functionality is present which enables a close up view of the centre point, which reveals individual dots.</p>
+            <p>The map shows that the majority of schools lie within Adelaide, with the population of Adelaide being 1,245,011 people as recorded in the 2021 Census. The second most populous city in South Australia is Gawler, which had 28,562 people as recorded in the 2021 census.
+                This means that the vast majority of South Australians live within Adelaide, which is one of the main reasons that most of the schools lie within the borders of the Adelaide city.
+            </p>
+            </div>
+        </div>
+    </div>
+<!-- end Map Text group -->
+
+    <!-- Bar + Pie -->
+    <div class="pure-g">
+        <div class="pure-u-1-3">
+            <div id="visBar" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3"> 
+            <div id="visPie" class="vis-container" style="margin-left: 15px;"></div>
+        </div>
+        <div class="pure-u-1-3"> 
+            <div class="descriptionRow2">
+            <h3>Types of Schools</h3>
+            <p>From the bar chart to the left, it is shown that Primary Education Schools have the most amount of schools in South Austalia, at 509 combined to date, and is the most popular type of school within South Australia.
+                Primary Schools make up 71.99% of all schools within South Australia. </p>
+            <p>For Secondary Education, this number is lowered by a significant amount, with only 86 government public schools, followed by combined Primary and Secondary Schools (Prep - Year 12 Schools) at 71 schools. This means that 
+                compared to the total amount of schools in the state, only 12.16% of them are Secondary Schools, and only 10.04% are combined primary and secondary schools. </p></div>
+        </div>
+        </div>
+    <!-- end Bar Pie group -->
+
+    <!--Line + difference -->
+    <div class="pure-g">
+        <div class="pure-u-1-3">
+            <div id="visDifference" class="vis-container"></div>
+        </div>
+        <div class="pure-u-1-3"> 
+            <div id="visLine" class="vis-container" style="margin-left: 15px;"></div>
+        </div>
+        <div class="pure-u-1-3"> 
+            <div class="descriptionRow2">
+            <h3>Declining Amount of Schools</h3>
+            <p>The first line chart on the left shows the change in the amount of schools per year. From the chart, it is shown that every year has a negative difference, suggesting that more schools close than open in South Australia.
+                In recent years, the change in the number of schools has equalised, meaning that the same number of schools open as the amount that close. As the population increases, more schools would need to be opened to accomodate for the heightened demand. </p>
+            <p>The second line chart showcases the enrollment numbers by type of school, illustrating that the amount of primary school enrollments is decreasing, whilst the amount of secondary school enrollments are increasing. This suggests that 
+                parents are not having as many child-births as before, lowering the amount of primary school enrollments, and that more parents are sending their children to government-funded public secondary schools, rather than private schools.
+            </p>
+            </div>
+        </div>
+        </div>
+    <!-- Line + difference -->
+
+    <script type="text/javascript">
+        var visMapChart = "map.json";
+        var visLineChart = "linechart.json";
+        var visBarChart = "barchart.json";
+        var visPieChart = "piechart.json";
+        var visDifference = "difference.json";
+
+    
+        vegaEmbed('#visMap', visMapChart, { "actions": false });
+    
+        vegaEmbed('#visLine', visLineChart, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+
+        vegaEmbed('#visPie', visPieChart, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+    
+        vegaEmbed('#visBar', visBarChart, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+        
+        vegaEmbed('#visDifference', visDifference, { "actions": false }).then(function (result) {
+          // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+      </script>
+    </body>
+    
+    </html>
+
+
+
+
+
+
+
+
+
+
+
