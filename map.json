@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 500,
   "height": 500,
-  "title": "South Australia Schools Enrollment (2023)",
+  "title": "South Australia Schools (2023)",
   "background": "lightblue",
   "params": [
     {
